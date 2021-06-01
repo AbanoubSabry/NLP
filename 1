@@ -1,0 +1,137 @@
+Preprocessing
+
+##Unicode Normalization
+from camel_tools.utils.normalize import normalize_unicode
+df = pd.read_csv("L2.train.m2.csv")
+print(df)
+sent_norm = normalize_unicode(df)
+print(sent_norm)
+
+## Orthographic Normalization
+from camel_tools.utils.normalize import normlize__alef_maksura_ar
+from camel_tools.utils.normalize import normalize_alef_ar
+From camel_tools.utils.normalize import normalize_teh_marbuta_ar
+df = pd.read_csv("L2.train.m2.csv")
+Print(df)
+Sent_norm = normalize_alef_ar(df)
+Sent_norm = normalize_alef_maksura_ar(sent_norm)
+Sent_norm = normalize_teh_marbuta_ar(sent_norm)
+Print(sent_norm)
+
+##Dediacritization
+From camel_tools.utils.dediac import dediac_ar
+df = pd.read_csv("L2.train.m2.csv")
+Print(df)
+Sent_dediac  = dediac_ar(df)
+Print(sent_dediac)
+
+##Space and Punctuation Splitting
+From camel_tools.tokenizers.word import simple_word_tokeniz
+df = pd.read_csv("L2.train.m2.csv")
+Print(df)
+Sent_split = simple_word_tokenize(df)
+Print(sent_split)
+
+## Transliteration
+From camel_tools.utils.charmap import charmapper
+df = pd.read_csv("L2.train.m2.csv")
+Print(df)
+Ar2bw = charmapper.builtin_mapper('ar2bw')
+Sent_bw = ar2bw(df)
+Print(sent_bw)
+
+##Morphological Analysis
+From camel_tools.morphology.database import MorphologyDB
+From camel_tools.morphology.analyzer import Analyzer
+df = pd.read_csv("L2.train.m2.csv")
+db = MorphologyDB.builtin_db(df)
+analyzer = Analyzer (db)
+analyses = analyzer.analyze ('df')
+Print(analyses)
+
+##Morphological Generation
+From camel_tools.morphology.database import MorphologyDB
+From camel_tools.morphology.generator import Generator
+db = MorphologyDB.builtin_db(flags='g')
+generator = Generator(db)
+Lemma = ''
+Features = {
+     'pos' : 'noun'
+     'geb' : 'm'
+     'num' : 'p'
+}
+analyses = generator.generate(Lemma, features)
+for diac in set ([a['diac'] for a in analyses]):
+Print(diac)
+
+##Morphological Rienflection
+From camel_tools.morphology.database import MorphologyDB
+From camel_tools.morphology.reinflector import reinflector
+db = MorphologyDB.builtin_db(flags='r')
+reinflector = Reinflector(db)
+Word = ''
+Features = {
+     'num' : 'd'
+     'Prc1' : 'bi_prep'
+}
+analyses = reinflector.reinflect(word, features)
+for diac in set ([a['diac'] for a in analyses]):
+Print(diac)
+
+##Morphological Disambiguation
+From camel_tools.disambig.mle import MLEDisambiguator.pretrained()
+Sentence = 'نجح بايدن فى الانتخابات'.split()
+Disambig = mle.disambiguate(sentence)
+diacritized = [d.analyses [0].analysis['poe'] for d in disambig]
+Lemma = [d.analyses [0].analysis['poe'] for d in disambig]
+for triplet in zip (diacritized,pos_tags, Lemmas):
+Print(triplet)
+
+##Tagging
+From camel_tools.diambig.mle import MLEDisambiguator
+From camel_tools.tagger.default import DefaultTagger
+mled = MLEDisambiguator.pretrained()
+tagger = DefaultTagger(mled), 'pos')
+df = pd.read_csv("L2.train.m2.csv").split()
+pos_tags = tagger.tag(df)
+print(pos_tags)
+
+##Tokienization
+From camel_tools.disambig.mle import MLEDisambiguator
+From camel_tools.tokenizers.morphological import Morphologicaltokenizer
+df = pd.read_csv("L2.train.m2.csv").split()
+Print(df)
+mled = MLEDisambiguator.pretrained('calima-msa-r13')
+Tokenizer = MorphologicalTokenizer(disambiguator=mled, scheme='d3tok')
+
+tokens = tokenizer.tokenize(df)
+Print(tokens)
+
+tokenizer = MorphologicalTokenizer(disambiguator=mled, scheme='d3tok',split='true')
+
+tokens = tokenizer.tokenize(df)
+Print(tokens)
+
+Tokenizer = MorphologicalTokenizer(disambiaguator=mled, scheme='d3tok', split='true')
+
+tokens = tokenizer.tokenize(df)
+Print(tokens)
+Tokenizer = MorphologicalTokenizer(disambiguator=mled, scheme='d3tok', split='true', diac=true)
+Tokens = tokenizer.tokenize(df)
+Print(tokens)
+
+##Sentiment Analysis
+sentence[
+???????
+]
+Sa = SentimentAnalyzer.pretrained()
+df = pd.read_csv("L2.train.m2.csv")
+Sentiments = Sa.predict(df)
+print(Sentiments)
+
+##Named Entity Recognition
+from camel_tools.ner import NERecognizer
+ner = NERecognizer.pretrained()
+.split()
+labels = ner.predict_sentence(df)
+print(list(zip(sentence,labels)))
